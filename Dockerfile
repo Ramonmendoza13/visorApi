@@ -37,12 +37,6 @@ COPY . /var/www/html
 # Instalar dependencias de Composer
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
-# Generar clave de aplicación
-RUN php artisan key:generate
-
-# Ejecutar migraciones (opcional, mejor hacerlo manual)
-# RUN php artisan migrate --force
-
 # Cambiar permisos
 RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache
