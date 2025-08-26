@@ -65,6 +65,8 @@ class LoginController extends Controller
                 'email_verified_at' => Carbon::now(),
             ]);
 
+            $token = $user->createToken('auth-token')->plainTextToken;
+
             return response()->json([
                 'mensaje' => 'Registro exitoso',
                 'user' => [
@@ -72,6 +74,7 @@ class LoginController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                 ],
+                'token' => $token,
             ], 201);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
