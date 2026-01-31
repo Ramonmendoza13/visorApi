@@ -21,9 +21,9 @@ class LoginController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['Las credenciales proporcionadas son incorrectas.'],
-            ]);
+            return response()->json([
+                'mensaje' => 'Credenciales inválidas.',
+            ], 401);
         }
 
         $token = $user->createToken('auth-token')->plainTextToken;
@@ -76,7 +76,6 @@ class LoginController extends Controller
                 ],
                 'token' => $token,
             ], 201);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
                 'mensaje' => 'Error de validación',
