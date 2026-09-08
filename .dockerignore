@@ -1,0 +1,35 @@
+# Excluir archivos innecesarios del contexto de build Docker
+# Esto acelera el docker build y reduce el tamaño de la imagen
+
+.git
+.gitattributes
+.gitignore
+.editorconfig
+.phpunit.cache
+.phpunit.result.cache
+.DS_Store
+Thumbs.db
+
+# Variables de entorno locales (Render las inyecta por su cuenta)
+.env
+.env.*
+!.env.example
+
+# Dependencias (se instalan en el build desde composer.lock)
+vendor/
+node_modules/
+
+# Assets compilados para desarrollo
+/public/build
+/public/hot
+
+# Logs y archivos de sesión locales
+storage/logs/
+storage/pail/
+
+# Tests (no necesarios en producción)
+tests/
+
+# Documentación
+*.md
+README*
